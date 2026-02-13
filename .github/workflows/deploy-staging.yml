@@ -77,3 +77,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deploy
         uses: actions/deploy-pages@v4
+
+      - name: Deployment URL
+        run: |
+          echo "## Staging deployment" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Live site:** [${{ steps.deploy.outputs.page_url }}](${{ steps.deploy.outputs.page_url }})" >> $GITHUB_STEP_SUMMARY

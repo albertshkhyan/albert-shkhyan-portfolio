@@ -2,8 +2,7 @@
 
 ## Environments
 
-- **Staging**: deploys from the `staging` branch to GitHub Pages.
-- **Production**: deploys from the `main` branch to GitHub Pages.
+- **Staging**: deploys from the `staging` branch to GitHub Pages. Production deployment is not configured.
 
 ## One-time setup (required)
 
@@ -16,15 +15,16 @@
 
 2. **Environments (optional)**
    - Repo **Settings → Environments**
-   - Add `staging` and `production` if you want branch protection or approval gates.
+   - Add `staging` if you want branch protection or approval gates for staging deploys.
 
 ## Workflows
 
 | Workflow            | Trigger        | Action                          |
 |--------------------|----------------|---------------------------------|
 | **CI**             | Push/PR to `main`, `staging` | Lint + build (no deploy)        |
-| **Deploy Staging** | Push to `staging`            | Lint + build + deploy to Pages   |
-| **Deploy Production** | Push to `main`           | Lint + build + deploy to Pages   |
+| **Deploy Staging** | Push to `staging`            | Lint check → build → deploy to Pages   |
+
+Deploy Staging runs a **lint** job first; only if it passes does **build** and then **deploy** run.
 
 ## URLs
 
@@ -32,12 +32,12 @@ After deployment, the site is available at:
 
 - **Project site**: `https://<owner>.github.io/<repo>/`
 
-Ensure `VITE_BASE_PATH` in the workflows matches your repo name (it uses `/${{ github.event.repository.name }}/` by default).
+Ensure `VITE_BASE_PATH` in the workflow matches your repo name (it uses `/${{ github.event.repository.name }}/` by default).
 
 ## Branch strategy
 
-- Use `staging` for preview; merge to `main` when ready for production.
-- Both branches deploy to the same GitHub Pages site; the last successful deploy wins.
+- Push to `staging` to deploy the staging site to GitHub Pages.
+- `main` does not trigger any deployment (production is skipped).
 
 ## Troubleshooting
 

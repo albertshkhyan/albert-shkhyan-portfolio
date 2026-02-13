@@ -1,48 +1,63 @@
 # CI/CD and deployment
 
-## Environments
+## Overview
 
-- **Staging**: deploys from the `staging` branch to GitHub Pages. Production deployment is not configured.
+- **CI**: Runs on every push and PR to `main` and `staging`. Lint + build only (no deploy).
+- **Deploy Staging**: Runs on push to `staging`. Install → lint → build → deploy to GitHub Pages.
+- **Production**: Not configured; add a new workflow when needed.
+
+## Design (scalable and best practices)
+
+| Practice | How it's done |
+|----------|----------------|
+| **Single source of truth for build** | Reusable composite action `.github/actions/build` (install → lint → build). CI and Deploy Staging both use it. |
+| **Consistent Node version** | `.nvmrc` (e.g. `20`). Local and CI use the same version via `node-version-file`. |
+| **Minimal permissions** | CI: `contents: read`. Deploy: `contents: read`, `pages: write`, `id-token: write`. |
+| **Concurrency** | CI and deploy use `concurrency` so duplicate runs can be cancelled. |
+| **Adding production later** | Add `deploy-production.yml` that calls the same build action and deploys (e.g. to Pages or another host). |
 
 ## One-time setup (required)
 
-1. **Enable GitHub Pages and set source to Actions**
-   - Open your repo on GitHub → **Settings** → **Pages** (left sidebar).
-   - Under **Build and deployment**:
-     - **Source**: select **GitHub Actions** (not "Deploy from a branch").
-   - Save. You do **not** need to pick a branch or folder.
-   - Without this, the deploy step will fail with **404 / "Ensure GitHub Pages has been enabled"**.
+1. **GitHub Pages**
+   - **Settings → Pages** → **Build and deployment** → **Source**: **GitHub Actions**.
+   - Without this, deploy fails with **404 / "Ensure GitHub Pages has been enabled"**.
 
 2. **Environments (optional)**
-   - Repo **Settings → Environments**
-   - Add `staging` if you want branch protection or approval gates for staging deploys.
+   - **Settings → Environments** → add `staging` (and later `production`) for protection rules or approval gates.
 
 ## Workflows
 
-| Workflow            | Trigger        | Action                          |
-|--------------------|----------------|---------------------------------|
-| **CI**             | Push/PR to `main`, `staging` | Lint + build (no deploy)        |
-| **Deploy Staging** | Push to `staging`            | Install → lint → build → deploy to Pages   |
-
-Deploy Staging runs in order: **install** (npm ci) → **lint** → **build** → **deploy** (staging).
+| Workflow | Trigger | Jobs |
+|----------|---------|------|
+| **CI** | Push/PR to `main`, `staging` | `lint & build` (uses build action) |
+| **Deploy Staging** | Push to `staging` | `install → lint → build` (uses build action) → `Upload artifact` → `deploy (staging)` |
 
 ## URLs
 
-After deployment, the site is available at:
+- **Staging (GitHub Pages):** `https://<owner>.github.io/<repo>/`
 
-- **Project site**: `https://<owner>.github.io/<repo>/`
-
-Ensure `VITE_BASE_PATH` in the workflow matches your repo name (it uses `/${{ github.event.repository.name }}/` by default).
+`VITE_BASE_PATH` is set from the repo name in the workflows.
 
 ## Branch strategy
 
-- Push to `staging` to deploy the staging site to GitHub Pages.
-- `main` does not trigger any deployment (production is skipped).
+- **staging**: Push to deploy staging to GitHub Pages.
+- **main**: No deploy; use for merging after staging is validated. Add a production workflow when needed.
+
+## Scaling: adding production
+
+1. Add `.github/workflows/deploy-production.yml`.
+2. Trigger on `main` (or `release`).
+3. Reuse the same build action; add a deploy step (e.g. `deploy-pages` again or another provider).
+4. Optionally add a `production` environment and required reviewers.
 
 ## Troubleshooting
 
 ### Deploy fails with 404 / "Ensure GitHub Pages has been enabled"
 
-- Go to **Settings → Pages** and set **Source** to **GitHub Actions**.
-- Direct link: `https://github.com/<owner>/<repo>/settings/pages` (replace `<owner>` and `<repo>`).
-- Re-run the failed workflow (Actions → select the run → "Re-run all jobs").
+- **Settings → Pages** → **Source** = **GitHub Actions**.
+- Link: `https://github.com/<owner>/<repo>/settings/pages`
+- Re-run the failed workflow.
+
+### Node version mismatch
+
+- Update `.nvmrc` and ensure local `node -v` matches. CI uses `.nvmrc` automatically.

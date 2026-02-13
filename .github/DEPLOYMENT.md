@@ -22,8 +22,10 @@
    - **Settings → Pages** → **Build and deployment** → **Source**: **GitHub Actions**.
    - Without this, deploy fails with **404 / "Ensure GitHub Pages has been enabled"**.
 
-2. **Environments (optional)**
-   - **Settings → Environments** → add `staging` (and later `production`) for protection rules or approval gates.
+2. **Allow `staging` to deploy to github-pages**
+   - **Settings → Environments** → open **github-pages**.
+   - Under **Deployment branches and tags**, ensure **staging** is allowed (click **"+ Add deployment branch or tag rule"** and add `staging` if only `main` is listed).
+   - Otherwise you'll get: *"Branch 'staging' is not allowed to deploy to github-pages due to environment protection rules."*
 
 ## Workflows
 
@@ -56,6 +58,12 @@
 
 - **Settings → Pages** → **Source** = **GitHub Actions**.
 - Link: `https://github.com/<owner>/<repo>/settings/pages`
+- Re-run the failed workflow.
+
+### Deploy fails: "Branch 'staging' is not allowed to deploy to github-pages"
+
+- The **github-pages** environment only allows certain branches. Add **staging** to the allowed list.
+- **Settings → Environments → github-pages** → **Deployment branches and tags** → **"+ Add deployment branch or tag rule"** → add the **staging** branch → save.
 - Re-run the failed workflow.
 
 ### Node version mismatch

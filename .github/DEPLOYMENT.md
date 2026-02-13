@@ -5,11 +5,14 @@
 - **Staging**: deploys from the `staging` branch to GitHub Pages.
 - **Production**: deploys from the `main` branch to GitHub Pages.
 
-## One-time setup
+## One-time setup (required)
 
-1. **GitHub Pages**
-   - Repo **Settings → Pages**
-   - **Source**: choose **GitHub Actions**.
+1. **Enable GitHub Pages and set source to Actions**
+   - Open your repo on GitHub → **Settings** → **Pages** (left sidebar).
+   - Under **Build and deployment**:
+     - **Source**: select **GitHub Actions** (not "Deploy from a branch").
+   - Save. You do **not** need to pick a branch or folder.
+   - Without this, the deploy step will fail with **404 / "Ensure GitHub Pages has been enabled"**.
 
 2. **Environments (optional)**
    - Repo **Settings → Environments**
@@ -35,3 +38,11 @@ Ensure `VITE_BASE_PATH` in the workflows matches your repo name (it uses `/${{ g
 
 - Use `staging` for preview; merge to `main` when ready for production.
 - Both branches deploy to the same GitHub Pages site; the last successful deploy wins.
+
+## Troubleshooting
+
+### Deploy fails with 404 / "Ensure GitHub Pages has been enabled"
+
+- Go to **Settings → Pages** and set **Source** to **GitHub Actions**.
+- Direct link: `https://github.com/<owner>/<repo>/settings/pages` (replace `<owner>` and `<repo>`).
+- Re-run the failed workflow (Actions → select the run → "Re-run all jobs").

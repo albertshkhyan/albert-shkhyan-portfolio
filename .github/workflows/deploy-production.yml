@@ -1,5 +1,7 @@
 # Production: build and deploy to GitHub Pages on push to `main` branch.
-# In repo Settings → Pages → Source: set to "GitHub Actions".
+#
+# REQUIRED: In repo Settings → Pages → Build and deployment → Source,
+# set to "GitHub Actions". Otherwise deploy will fail with 404.
 
 name: Deploy Production
 

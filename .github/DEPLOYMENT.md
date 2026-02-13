@@ -22,9 +22,9 @@
 | Workflow            | Trigger        | Action                          |
 |--------------------|----------------|---------------------------------|
 | **CI**             | Push/PR to `main`, `staging` | Lint + build (no deploy)        |
-| **Deploy Staging** | Push to `staging`            | Lint check → build → deploy to Pages   |
+| **Deploy Staging** | Push to `staging`            | Install → lint → build → deploy to Pages   |
 
-Deploy Staging runs a **lint** job first; only if it passes does **build** and then **deploy** run.
+Deploy Staging runs in order: **install** (npm ci) → **lint** → **build** → **deploy** (staging).
 
 ## URLs
 

@@ -1,4 +1,5 @@
-# CI: lint and build on PRs and pushes to main / staging.
+# CI: validate every push and PR to main/staging (no deploy).
+# Uses shared build action for consistency with deploy workflow.
 
 name: CI
 
@@ -8,26 +9,19 @@ on:
   pull_request:
     branches: [main, staging]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  lint-build:
+  build:
+    name: lint & build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Lint
-        run: npm run lint
-
       - name: Build
-        run: npm run build
-        env:
-          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+        uses: ./.github/actions/build
+        with:
+          base-path: /${{ github.event.repository.name }}/

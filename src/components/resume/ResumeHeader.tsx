@@ -54,9 +54,9 @@ export function ResumeHeader({ resumePdfUrl }: ResumeHeaderProps) {
             href={resumePdfUrl}
             download="Albert_Shkhyan_Resume.pdf"
             className="no-print text-caption font-medium text-primary hover:text-primary-dark underline"
-            aria-label="Download resume as PDF"
+            aria-label="Download original CV"
           >
-            Download PDF
+            Download CV
           </a>
         )}
       </div>

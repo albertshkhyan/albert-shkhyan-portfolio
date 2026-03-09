@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 
-/** backInUp-style: from below with slight overshoot (spring). */
 const backInUpTransition = {
   type: 'spring' as const,
   stiffness: 320,

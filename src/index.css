@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* ----- Colors (resume UI) ----- */
   --color-primary: #1a73e8;
@@ -61,6 +63,23 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.dark {
+  --color-primary: #5b9cf4;
+  --color-primary-dark: #7eb8f7;
+  --color-heading: #f1f5f9;
+  --color-body: #cbd5e1;
+  --color-muted: #94a3b8;
+  --color-surface: #0f172a;
+  --color-surface-subtle: #1e293b;
+  --color-border: #334155;
+  --color-border-strong: #475569;
+  --color-divider: #334155;
+}
+
+.dark body {
+  background-color: var(--color-surface);
 }
 
 *,

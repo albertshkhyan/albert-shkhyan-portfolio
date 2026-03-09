@@ -87,7 +87,7 @@ export function PortfolioLinksFab() {
                 target="_blank"
                 rel="noopener noreferrer"
                 variants={ITEM_VARIANTS}
-                className="flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full bg-surface shadow-md ring-1 ring-border hover:bg-surface-subtle hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                className="flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full bg-surface text-body shadow-md ring-1 ring-border hover:bg-surface-subtle hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface"
                 aria-label={ariaLabel}
                 title={label}
               >
@@ -104,7 +104,7 @@ export function PortfolioLinksFab() {
         aria-expanded={isOpen}
         aria-label={isOpen ? 'Close portfolio links' : 'More portfolios'}
         aria-haspopup="true"
-        className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-primary text-white shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="flex min-h-11 min-w-11 items-center justify-center rounded-full bg-primary text-white shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface disabled:opacity-50 disabled:cursor-not-allowed"
         whileTap={{ scale: 0.96 }}
       >
         <motion.span

@@ -1,3 +1,4 @@
+import { PortfolioLinksFab } from './components/PortfolioLinksFab';
 import { ResumeHeader } from './components/resume/ResumeHeader';
 import { ResumeLeftColumn, ResumeRightColumn } from './components/resume';
 import resumePdfUrl from './assets/pdf/Albert_Shkhyan_Resume.pdf?url';
@@ -14,6 +15,7 @@ function App() {
           </div>
         </article>
       </div>
+      <PortfolioLinksFab />
     </main>
   );
 }

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Monitor, Moon, Sun } from 'lucide-react';
-import { useTheme, type ThemePreference } from '../contexts/ThemeContext';
+import { useTheme, type ThemePreference } from '../contexts/themeContext';
 
 const OPTIONS: { value: ThemePreference; icon: typeof Sun; label: string }[] = [
   { value: 'light', icon: Sun, label: 'Light' },

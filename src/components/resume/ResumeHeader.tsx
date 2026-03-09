@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { Linkedin } from 'lucide-react';
+import { ThemeToggle } from '../ThemeToggle';
 import { resumeData } from '../../data/resumeData';
 import {
   HEADER_OFFSET_Y,
@@ -49,16 +50,19 @@ export function ResumeHeader({ resumePdfUrl }: ResumeHeaderProps) {
             <p className="mt-2 text-body text-muted max-w-xl">{about}</p>
           )}
         </div>
-        {resumePdfUrl && (
-          <a
-            href={resumePdfUrl}
-            download="Albert_Shkhyan_Resume.pdf"
-            className="no-print text-caption font-medium text-primary hover:text-primary-dark underline"
-            aria-label="Download original CV"
-          >
-            Download CV
-          </a>
-        )}
+        <div className="flex flex-wrap items-center gap-3">
+          <ThemeToggle />
+          {resumePdfUrl && (
+            <a
+              href={resumePdfUrl}
+              download="Albert_Shkhyan_Resume.pdf"
+              className="no-print text-caption font-medium text-primary hover:text-primary-dark underline"
+              aria-label="Download original CV"
+            >
+              Download CV
+            </a>
+          )}
+        </div>
       </div>
       <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-xs text-body sm:flex sm:flex-wrap sm:gap-x-6 sm:text-caption">
         <span className="flex items-center gap-1.5">

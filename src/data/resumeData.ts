@@ -1,6 +1,5 @@
 import type { ResumeData } from '../types/resume';
-
-const base = import.meta.env.BASE_URL;
+import { projectEntries } from './projectsData';
 
 export const resumeData: ResumeData = {
   name: 'Albert Shkhyan',
@@ -17,54 +16,69 @@ export const resumeData: ResumeData = {
     'Experienced Software Engineer with over 4 years of expertise in developing front-end and mobile applications using React, React Native, and Next.js, complemented by solid back-end experience in Nest.js and Node.js. Proficient in JavaScript and TypeScript, with deep knowledge of state management, responsive design, and cross-browser compatibility. Collaborative team player passionate about leveraging modern front-end technologies to solve UI challenges and enhance performance.',
   skills: [
     {
-      category: 'Front-end',
+      category: 'Frontend',
       items: [
         'React.js',
         'Next.js',
         'React Native',
-        'Redux',
         'TypeScript',
         'JavaScript',
-        'React Query / RTK Query',
+        'Redux Toolkit',
+        'TanStack Query',
         'HTML5',
-        'CSS/SCSS',
+        'CSS / SCSS',
+        'Tailwind CSS',
       ],
     },
     {
-      category: 'Back-end',
+      category: 'Backend',
       items: [
-        'Nest.js',
         'Node.js',
-        'Express.js',
-        'REST API (+ Swagger)',
-        'Auth: JWT/OAuth2',
+        'NestJS',
+        'Express',
+        'REST API',
+        'Authentication (JWT / OAuth2)',
       ],
     },
     {
       category: 'Data',
-      items: ['PostgreSQL', 'MongoDB', 'Typeorm'],
+      items: ['PostgreSQL', 'MongoDB', 'TypeORM'],
     },
     {
-      category: 'Testing & DevOps',
+      category: 'Testing',
+      items: ['Jest', 'Vitest', 'React Testing Library', 'Playwright'],
+    },
+    {
+      category: 'DevOps',
       items: [
-        'Jest',
         'AWS (S3)',
+        'Docker',
         'CI/CD (GitHub Actions)',
-        'Deployment (Vercel/Netlify/AWS)',
-        'Sentry (monitoring)',
+        'Deployment (Vercel / Netlify / AWS)',
+        'Sentry',
+      ],
+    },
+    {
+      category: 'Build Tools',
+      items: ['Vite', 'Webpack', 'Babel'],
+    },
+    {
+      category: 'Performance',
+      items: [
+        'Code splitting',
+        'Lazy loading',
+        'Bundle optimization',
+        'Web Vitals',
       ],
     },
     {
       category: 'Other',
       items: [
         'Git',
-        'Docker',
-        'ESLint + Prettier',
         'Socket.IO',
         'Twilio',
-        'Xcode/Android Studio',
-        'Canvas, Three.js, Fabric.js',
-        'WebGL & Shaders',
+        'Canvas / Three.js / WebGL',
+        'Xcode / Android Studio',
       ],
     },
   ],
@@ -97,55 +111,7 @@ export const resumeData: ResumeData = {
       ],
     },
   ],
-  projects: [
-    {
-      title: 'Mementix',
-      logo: `${base}logos/mementix-logo.svg`,
-      titleHref: 'https://apps.apple.com/am/app/mementix/id6472716301',
-      date: '2023 - 2024',
-      location: 'Yerevan, Armenia',
-      tags: ['React Native', 'TypeScript', 'NestJS', 'PostgreSQL'],
-      role: 'Frontend Engineer',
-      description:
-        'Comprehensive social event and ticket management application designed to streamline event coordination among friends and family.',
-      bullets: [
-        'React Native app with real-time updates and offline support.',
-        'Backend APIs for events, tickets, and user management.',
-      ],
-      extra: { label: 'App Store', href: 'https://apps.apple.com/am/app/mementix/id6472716301' },
-      demoGif: `${base}gif/mementix-demo.gif`,
-    },
-    {
-      title: 'Sinclair',
-      logo: `${base}logos/sigma-logo.svg`,
-      date: '2020 - 2022',
-      location: 'Yerevan, Armenia',
-      tags: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
-      role: 'Full-Stack Engineer',
-      description:
-        'Developed and optimized Sigma/Sinclair, a high-fashion marketplace connecting sellers and buyers.',
-      bullets: [
-        'Real-time chat, secure payments, and dynamic search.',
-        'Performance and UX improvements across the platform.',
-      ],
-      demoGif: `${base}gif/sigma-sinclair-demo.gif`,
-    },
-    {
-      title: 'Unico',
-      logo: `${base}logos/unico-logo.svg`,
-      date: '2020 - 2021',
-      location: 'Yerevan, Armenia',
-      tags: ['React', 'TypeScript', 'Fabric.js', 'Canvas'],
-      role: 'Frontend Engineer',
-      description:
-        '2D sneaker builder platform with advanced canvas technology and interactive UI for custom footwear design.',
-      bullets: [
-        'Canvas-based customization and real-time preview.',
-        'Export and order flow integration.',
-      ],
-      demoGif: `${base}gif/unico-demo.gif`,
-    },
-  ],
+  projects: projectEntries,
   languages: [
     { name: 'Armenian', level: 'Native', filledDots: 5 },
     { name: 'English', level: 'Advanced', filledDots: 3 },

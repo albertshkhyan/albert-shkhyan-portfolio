@@ -17,6 +17,24 @@ export interface DatedEntryData {
   demoGif?: string;
 }
 
+export type ProjectCategory = 'commercial-mobile' | 'commercial-web' | 'personal';
+
+export type ProjectBadge = 'live' | 'demo' | 'appStore';
+
+export type ProjectActionType = 'demo' | 'website' | 'appStore' | 'github';
+
+export interface ProjectActionLink {
+  type: ProjectActionType;
+  label: string;
+  href: string;
+}
+
+export interface ProjectEntry extends DatedEntryData {
+  category: ProjectCategory;
+  badges?: ProjectBadge[];
+  links?: ProjectActionLink[];
+}
+
 export interface LanguageData {
   name: string;
   level: string;
@@ -57,7 +75,7 @@ export interface ResumeData {
   summary: string;
   skills: SkillGroup[];
   experience: DatedEntryData[];
-  projects: DatedEntryData[];
+  projects: ProjectEntry[];
   languages: LanguageData[];
   social: SocialLinkData[];
   strengths: StrengthData[];

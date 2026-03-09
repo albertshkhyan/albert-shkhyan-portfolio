@@ -67,10 +67,6 @@ export function PortfolioLinksFab() {
   }, [showGuide]);
 
   useEffect(() => {
-    if (isOpen) dismissGuide();
-  }, [isOpen, dismissGuide]);
-
-  useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') close();
     };
@@ -145,7 +141,10 @@ export function PortfolioLinksFab() {
       </AnimatePresence>
       <motion.button
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => {
+          dismissGuide();
+          setIsOpen((prev) => !prev);
+        }}
         aria-expanded={isOpen}
         aria-label={isOpen ? 'Close portfolio links' : 'More portfolios'}
         aria-haspopup="true"

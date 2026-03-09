@@ -42,29 +42,19 @@ const ITEM_VARIANTS = {
   open: { opacity: 1, y: 0 },
 };
 
-const FAB_GUIDE_SEEN_KEY = 'portfolio-fab-guide-seen';
 const FAB_GUIDE_DELAY_MS = 1500;
 
 export function PortfolioLinksFab() {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [showGuide, setShowGuide] = useState(
-    () => !localStorage.getItem(FAB_GUIDE_SEEN_KEY),
-  );
   const [guideRevealed, setGuideRevealed] = useState(false);
 
   const close = useCallback(() => setIsOpen(false), []);
 
-  const dismissGuide = useCallback(() => {
-    localStorage.setItem(FAB_GUIDE_SEEN_KEY, '1');
-    setShowGuide(false);
-  }, []);
-
   useEffect(() => {
-    if (!showGuide) return;
     const t = setTimeout(() => setGuideRevealed(true), FAB_GUIDE_DELAY_MS);
     return () => clearTimeout(t);
-  }, [showGuide]);
+  }, []);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -89,28 +79,23 @@ export function PortfolioLinksFab() {
       role="group"
       aria-label="Other portfolios"
     >
-      <AnimatePresence>
-        {showGuide && guideRevealed && (
-          <motion.button
-            key="fab-guide"
-            type="button"
-            onClick={dismissGuide}
-            className="flex shrink-0 cursor-pointer items-end focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface"
-            initial={{ x: 80, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 80, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            aria-label="Hint: click the button below to see more portfolios. Click to dismiss."
-          >
-            <img
-              src={guideCharacterImage}
-              alt="Character pointing down: Curious? Click here!"
-              className="h-36 w-auto select-none object-contain object-bottom"
-              draggable={false}
-            />
-          </motion.button>
-        )}
-      </AnimatePresence>
+      {guideRevealed && (
+        <motion.div
+          key="fab-guide"
+          className="flex shrink-0 items-end"
+          initial={{ x: 80, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.25 }}
+          aria-hidden
+        >
+          <img
+            src={guideCharacterImage}
+            alt="Character pointing down: Curious? Click here!"
+            className="h-36 w-auto select-none object-contain object-bottom"
+            draggable={false}
+          />
+        </motion.div>
+      )}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -141,10 +126,7 @@ export function PortfolioLinksFab() {
       </AnimatePresence>
       <motion.button
         type="button"
-        onClick={() => {
-          dismissGuide();
-          setIsOpen((prev) => !prev);
-        }}
+        onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
         aria-label={isOpen ? 'Close portfolio links' : 'More portfolios'}
         aria-haspopup="true"

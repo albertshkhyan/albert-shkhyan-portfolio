@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, LayoutGrid, Sparkles } from 'lucide-react';
-import guideCharacterImage from '../assets/ui-guide-character-click-here.png';
+
+const guideCharacterImage = `${import.meta.env.BASE_URL}images/ui-guide-character-click-here.png`;
 
 const PORTFOLIO_LINKS = [
   {

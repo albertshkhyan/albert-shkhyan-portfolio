@@ -1,10 +1,6 @@
 import type { ResumeData } from '../types/resume';
-import mementixDemoGif from '../assets/gif/mementix-demo.gif';
-import sigmaSinclairDemoGif from '../assets/gif/sigma-sinclair-demo.gif';
-import unicoDemoGif from '../assets/gif/unico-demo.gif';
-import mementixLogo from '../assets/logos/mementix-logo.svg';
-import sigmaLogo from '../assets/logos/sigma-logo.svg';
-import unicoLogo from '../assets/logos/unico-logo.svg';
+
+const base = import.meta.env.BASE_URL;
 
 export const resumeData: ResumeData = {
   name: 'Albert Shkhyan',
@@ -104,7 +100,7 @@ export const resumeData: ResumeData = {
   projects: [
     {
       title: 'Mementix',
-      logo: mementixLogo,
+      logo: `${base}logos/mementix-logo.svg`,
       titleHref: 'https://apps.apple.com/am/app/mementix/id6472716301',
       date: '2023 - 2024',
       location: 'Yerevan, Armenia',
@@ -117,11 +113,11 @@ export const resumeData: ResumeData = {
         'Backend APIs for events, tickets, and user management.',
       ],
       extra: { label: 'App Store', href: 'https://apps.apple.com/am/app/mementix/id6472716301' },
-      demoGif: mementixDemoGif,
+      demoGif: `${base}gif/mementix-demo.gif`,
     },
     {
       title: 'Sinclair',
-      logo: sigmaLogo,
+      logo: `${base}logos/sigma-logo.svg`,
       date: '2020 - 2022',
       location: 'Yerevan, Armenia',
       tags: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
@@ -132,11 +128,11 @@ export const resumeData: ResumeData = {
         'Real-time chat, secure payments, and dynamic search.',
         'Performance and UX improvements across the platform.',
       ],
-      demoGif: sigmaSinclairDemoGif,
+      demoGif: `${base}gif/sigma-sinclair-demo.gif`,
     },
     {
       title: 'Unico',
-      logo: unicoLogo,
+      logo: `${base}logos/unico-logo.svg`,
       date: '2020 - 2021',
       location: 'Yerevan, Armenia',
       tags: ['React', 'TypeScript', 'Fabric.js', 'Canvas'],
@@ -147,7 +143,7 @@ export const resumeData: ResumeData = {
         'Canvas-based customization and real-time preview.',
         'Export and order flow integration.',
       ],
-      demoGif: unicoDemoGif,
+      demoGif: `${base}gif/unico-demo.gif`,
     },
   ],
   languages: [

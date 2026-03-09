@@ -41,7 +41,7 @@ function ProjectLayout({
             <img
               src={logo}
               alt=""
-              className="max-h-full max-w-full object-contain"
+              className={`max-h-full max-w-full object-contain ${title !== 'Mementix' ? 'dark:brightness-0 dark:invert' : ''}`}
             />
           </div>
         )}
@@ -138,7 +138,7 @@ function ExperienceLayout({ entry }: { entry: DatedEntryData }) {
         <img
           src={logo}
           alt=""
-          className="mb-3 h-12 w-auto object-contain"
+          className={`mb-3 h-12 w-auto object-contain ${title !== 'Mementix' ? 'dark:brightness-0 dark:invert' : ''}`}
         />
       )}
       <h3 className="text-heading-lg font-bold text-heading">

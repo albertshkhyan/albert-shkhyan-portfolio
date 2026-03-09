@@ -1,7 +1,8 @@
 import { PortfolioLinksFab } from './components/PortfolioLinksFab';
 import { ResumeHeader } from './components/resume/ResumeHeader';
 import { ResumeLeftColumn, ResumeRightColumn } from './components/resume';
-import resumePdfUrl from './assets/pdf/Albert_Shkhyan_Resume.pdf?url';
+
+const resumePdfUrl = `${import.meta.env.BASE_URL}pdf/Albert_Shkhyan_Resume.pdf`;
 
 function App() {
   return (
